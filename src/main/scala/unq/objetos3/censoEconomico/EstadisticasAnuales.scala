@@ -13,6 +13,8 @@ class EstadisticasAnuales(val anio: Int) {
   def totalGanancias = empresas.map(_.totalGanancias(anio)).foldLeft(0)(_ + _)
 
   def empresasConVentasMayoresA(monto: Int) = ventasPorAnio.count(_ > monto)
+  def empresasConGananciasMayoresA(monto: Int) = ventasPorAnio.count(_ > monto)
+  def empresasConTasaGananciaMayoresA(monto: Int) = empresas.map(_.tasaGanancias(anio)).count(_ > monto)
 
   private def empresas = HomeEmpresas.all
   private def ventasPorAnio = empresas.map(_.totalVentas(anio))

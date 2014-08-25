@@ -11,8 +11,8 @@ class Empresa() {
   }
 
   def totalVentas(anio: Int) = registroDe(anio).ventas
-
   def totalGanancias(anio: Int) = registroDe(anio).ganancias
+  def tasaGanancias(anio: Int) = registroDe(anio).tasaGanancias
 
   private def registroDe(anio: Int) = registros.find(_.esDeAnio(anio)).get
 }
