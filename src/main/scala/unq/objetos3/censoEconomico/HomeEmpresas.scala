@@ -5,6 +5,7 @@ import scala.collection.mutable
 object HomeEmpresas {
   val empresas = mutable.Buffer[Empresa]()
 
-  def agregar(empresas: Empresa*) = this.empresas ++= empresas
-  def all() = empresas
+  def all = empresas.toSeq
+  def add(empresas: Empresa*) = this.empresas ++= empresas
+  def clear() = empresas.clear()
 }
