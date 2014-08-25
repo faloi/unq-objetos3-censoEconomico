@@ -1,6 +1,7 @@
 package unq.objetos3.censoEconomico
 
 class EstadisticasAnuales(val anio: Int) {
+
   def totalVentas = ventasPorAnio.foldLeft(0)(_ + _)
 
   def totalVentasSinFold = {
@@ -10,6 +11,8 @@ class EstadisticasAnuales(val anio: Int) {
   }
 
   def totalGanancias = empresas.map(_.totalGanancias(anio)).foldLeft(0)(_ + _)
+
+  def empresasConVentasMayoresA(monto: Int) = ventasPorAnio.count(_ > monto)
 
   private def empresas = HomeEmpresas.all
   private def ventasPorAnio = empresas.map(_.totalVentas(anio))

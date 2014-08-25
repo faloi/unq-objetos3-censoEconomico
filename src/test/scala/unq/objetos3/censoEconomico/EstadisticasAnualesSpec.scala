@@ -27,6 +27,10 @@ class EstadisticasAnualesSpec extends UnitSpec {
     new EstadisticasAnuales(2014).totalGanancias should be(100000)
   }
 
+  it should "saber cuantas empresas superan un monto X de ventas" in {
+    new EstadisticasAnuales(2013).empresasConVentasMayoresA(60000) should be (1)
+  }
+
   after {
     HomeEmpresas.clear()
   }
