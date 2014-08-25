@@ -23,6 +23,10 @@ class EstadisticasAnualesSpec extends UnitSpec {
     new EstadisticasAnuales(2013).totalVentasSinFold should be(120000)
   }
 
+  it should "saber las ganancias por anio" in {
+    new EstadisticasAnuales(2014).totalGanancias should be(100000)
+  }
+
   after {
     HomeEmpresas.clear()
   }

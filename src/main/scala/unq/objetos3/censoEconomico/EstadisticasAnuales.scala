@@ -1,8 +1,6 @@
 package unq.objetos3.censoEconomico
 
 class EstadisticasAnuales(val anio: Int) {
-  private def ventasPorAnio = HomeEmpresas.all.map(_.ventasTotales(anio))
-
   def totalVentas = ventasPorAnio.foldLeft(0)(_ + _)
 
   def totalVentasSinFold = {
@@ -10,4 +8,9 @@ class EstadisticasAnuales(val anio: Int) {
     ventasPorAnio.foreach(acum += _)
     acum
   }
+
+  def totalGanancias = empresas.map(_.totalGanancias(anio)).foldLeft(0)(_ + _)
+
+  private def empresas = HomeEmpresas.all
+  private def ventasPorAnio = empresas.map(_.totalVentas(anio))
 }

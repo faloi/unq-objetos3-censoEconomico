@@ -10,5 +10,9 @@ class Empresa() {
     this
   }
 
-  def ventasTotales(anio: Int) = registros.find(_.esDeAnio(anio)).get.ventas
+  def totalVentas(anio: Int) = registroDe(anio).ventas
+
+  def totalGanancias(anio: Int) = registroDe(anio).ganancias
+
+  private def registroDe(anio: Int) = registros.find(_.esDeAnio(anio)).get
 }
