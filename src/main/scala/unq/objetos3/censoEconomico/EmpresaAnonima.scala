@@ -1,5 +1,3 @@
 package unq.objetos3.censoEconomico
 
-class EmpresaAnonima extends Empresa {
-
-}
+class EmpresaAnonima(departamento: Departamento) extends Empresa(departamento)

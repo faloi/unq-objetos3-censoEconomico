@@ -2,7 +2,7 @@ package unq.objetos3.censoEconomico
 
 import scala.collection.mutable
 
-class Empresa() {
+class Empresa(val departamento: Departamento) {
   val registros = mutable.Buffer[Registro]()
 
   def agregarRegistro(registro: Registro) = {

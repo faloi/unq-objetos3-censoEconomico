@@ -5,11 +5,11 @@ import org.joda.time.LocalDate
 class EstadisticasAnualesSpec extends UnitSpec {
   before {
     HomeEmpresas.add(
-      new Empresa()
+      new Empresa(new Departamento("Esquina", "Corrientes"))
         .agregarRegistro(new Registro(new LocalDate(2013, 12, 30), 70000, 50000)) //tasa: 71,43
         .agregarRegistro(new Registro(new LocalDate(2014, 12, 30), 100000, 80000)), //tasa: 80
 
-      new EmpresaAnonima()
+      new EmpresaAnonima(new Departamento("CABA", "CABA"))
         .agregarRegistro(new Registro(new LocalDate(2013, 12, 30), 50000, 30000)) //tasa: 60
         .agregarRegistro(new Registro(new LocalDate(2014, 12, 30), 40000, 20000)) //tasa: 50
     )
@@ -33,6 +33,15 @@ class EstadisticasAnualesSpec extends UnitSpec {
 
   it should "saber cuantas empresas superan un monto X de tasa de ganancias" in {
     new EstadisticasAnuales(2014).empresasConTasaGananciaMayoresA(30) should be (2)
+  }
+
+  it should "saber la cantidad de ventas por provincia" in {
+    HomeEmpresas.add(
+      new EmpresaAnonima(new Departamento("Almagro", "CABA"))
+      .agregarRegistro(new Registro(new LocalDate(2014, 12, 30), 100000, 100000))
+    )
+
+    new EstadisticasAnuales(2014).ventasPorProvincia should be (Map("Corrientes" -> 100000, "CABA" -> 140000))
   }
 
   after {
