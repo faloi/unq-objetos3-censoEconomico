@@ -20,6 +20,9 @@ class EstadisticasAnuales(val anio: Int) {
     .groupBy(_.departamento.provincia)
     .mapValues(empresasDeProvincia => empresasDeProvincia.map(_.totalVentas(anio)).sum)
 
+  def nombreEmpresasConVentasMayoresA(monto: Int) = empresasConocidas.filter(_.totalVentas(anio) > monto).map(_.nombre)
+
   private def empresas = HomeEmpresas.all
+  private def empresasConocidas = HomeEmpresas.conocidas
   private def ventasPorAnio = empresas.map(_.totalVentas(anio))
 }
