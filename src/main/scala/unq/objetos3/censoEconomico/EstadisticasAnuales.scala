@@ -24,6 +24,8 @@ class EstadisticasAnuales(val anio: Int) {
 
   def fuentesQueAportaron = empresasConocidas.filter(_.registraActividadEn(anio)).map(_.fuente).distinct
 
+  def empresaConMasGanancias = empresasConocidas.maxBy(_.totalGanancias(anio)).nombre
+
   private def empresas = HomeEmpresas.all
   private def empresasConocidas = HomeEmpresas.conocidas
   private def ventasPorAnio = empresas.map(_.totalVentas(anio))

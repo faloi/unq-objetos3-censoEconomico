@@ -70,6 +70,15 @@ class EstadisticasAnualesSpec extends UnitSpec {
     new EstadisticasAnuales(2014).fuentesQueAportaron should be (Seq("Camara de Industria del Litoral", "Gremio del codigo de barras"))
   }
 
+  it should "saber que empresa tuvo mas ganancias" in {
+    HomeEmpresas.add(
+      new Empresa("Globant", "Union Informatica", new Departamento("Puerto Madero", "CABA"))
+        .agregarRegistro(new Registro(new LocalDate(2014, 12, 30), 1600000, 1000000))
+    )
+
+    new EstadisticasAnuales(2014).empresaConMasGanancias should be ("Globant")
+  }
+
   after {
     HomeEmpresas.clear()
   }
