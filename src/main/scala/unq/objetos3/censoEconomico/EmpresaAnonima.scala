@@ -16,6 +16,8 @@ class EmpresaAnonima(val departamento: Departamento) {
 
   def registraActividadEn(anio: Int) = registroDe(anio).isDefined
 
+  def esSolida = registros.forall(_.esSolido)
+
   private def atributoDe[A](anio: Int, propiedad: (Registro) => A, default: A) = registroDe(anio).map(propiedad).getOrElse(default)
   private def registroDe(anio: Int) = registros.find(_.esDeAnio(anio))
 }
