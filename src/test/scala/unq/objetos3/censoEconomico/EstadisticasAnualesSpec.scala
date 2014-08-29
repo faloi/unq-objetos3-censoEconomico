@@ -9,9 +9,11 @@ class EstadisticasAnualesSpec extends UnitSpec {
         .agregarRegistro(new Registro(new LocalDate(2013, 12, 30), 70000, 50000)) //tasa: 71,43
         .agregarRegistro(new Registro(new LocalDate(2014, 12, 30), 100000, 80000)), //tasa: 80
 
-      new EmpresaAnonima(new Departamento("CABA", "CABA"))
+      new EmpresaAnonima(new Departamento("Floresta", "CABA"))
         .agregarRegistro(new Registro(new LocalDate(2013, 12, 30), 50000, 30000)) //tasa: 60
-        .agregarRegistro(new Registro(new LocalDate(2014, 12, 30), 40000, 20000)) //tasa: 50
+        .agregarRegistro(new Registro(new LocalDate(2014, 12, 30), 40000, 20000)), //tasa: 50
+
+      new EmpresaAnonima(new Departamento("Almagro", "CABA"))
     )
   }
 

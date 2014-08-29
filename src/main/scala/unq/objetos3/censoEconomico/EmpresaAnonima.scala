@@ -10,11 +10,12 @@ class EmpresaAnonima(val departamento: Departamento) {
     this
   }
 
-  def totalVentas(anio: Int) = registroDe(anio).map(_.ventas).getOrElse(0)
-  def totalGanancias(anio: Int) = registroDe(anio).map(_.ganancias).getOrElse(0)
-  def tasaGanancias(anio: Int) = registroDe(anio).map(_.tasaGanancias).getOrElse(0f)
+  def totalVentas(anio: Int) = atributoDe(anio, _.ventas, 0)
+  def totalGanancias(anio: Int) = atributoDe(anio, _.ganancias, 0)
+  def tasaGanancias(anio: Int) = atributoDe(anio, _.tasaGanancias, 0f)
 
-  def registraActividadEn(anio: Int): Boolean = registroDe(anio).isDefined
+  def registraActividadEn(anio: Int) = registroDe(anio).isDefined
 
+  private def atributoDe[A](anio: Int, propiedad: (Registro) => A, default: A) = registroDe(anio).map(propiedad).getOrElse(default)
   private def registroDe(anio: Int) = registros.find(_.esDeAnio(anio))
 }
