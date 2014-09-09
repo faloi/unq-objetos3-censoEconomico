@@ -10,15 +10,16 @@ class EmpresaAnonima(val departamento: Departamento) {
     this
   }
 
-  def totalVentas(anio: Int) = atributoDe(anio, _.ventas, 0)
-  def totalGanancias(anio: Int) = atributoDe(anio, _.ganancias, 0)
-  def tasaGanancias(anio: Int) = atributoDe(anio, _.tasaGanancias, 0f)
-
-  def registraActividadEn(anio: Int) = registroDe(anio).isDefined
+  def totalVentasSegun(criterio: (Registro) => Boolean) = atributoDe(criterio, _.ventas, 0)
+  def totalGananciasSegun(criterio: (Registro) => Boolean) = atributoDe(criterio, _.ganancias, 0)
+  def tasaGananciasSegun(criterio: (Registro) => Boolean) = atributoDe(criterio, _.tasaGanancias, 0f)
+  def registraActividadSegun(criterio: (Registro) => Boolean) = registroDe(criterio).isDefined
 
   def esSolida = registros.forall(_.esSolido)
   def esSospechosa = registros.exists(_.esSospechoso)
 
-  private def atributoDe[A](anio: Int, propiedad: (Registro) => A, default: A) = registroDe(anio).map(propiedad).getOrElse(default)
-  private def registroDe(anio: Int) = registros.find(_.esDeAnio(anio))
+  private def atributoDe[A](criterio: (Registro) => Boolean, propiedad: (Registro) => A, default: A) =
+    registroDe(criterio).map(propiedad).getOrElse(default)
+
+  private def registroDe(criterio: (Registro) => Boolean) = registros.find(criterio)
 }
