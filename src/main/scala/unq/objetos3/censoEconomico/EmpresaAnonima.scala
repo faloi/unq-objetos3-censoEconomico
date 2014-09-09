@@ -6,20 +6,21 @@ class EmpresaAnonima(val departamento: Departamento) {
   val registros = mutable.Buffer[Registro]()
 
   def agregarRegistro(registro: Registro) = {
+    registro.empresa = this
     registros += registro
     this
   }
 
-  def totalVentasSegun(criterio: (Registro) => Boolean) = atributoDe(criterio, _.ventas, 0)
-  def totalGananciasSegun(criterio: (Registro) => Boolean) = atributoDe(criterio, _.ganancias, 0)
-  def tasaGananciasSegun(criterio: (Registro) => Boolean) = atributoDe(criterio, _.tasaGanancias, 0f)
-  def registraActividadSegun(criterio: (Registro) => Boolean) = registroDe(criterio).isDefined
+  def totalVentasSegun(criterio: (Registro) => Boolean) = atributoDe(criterio, _.ventas)
+  def totalGananciasSegun(criterio: (Registro) => Boolean) = atributoDe(criterio, _.ganancias)
+  def tasaGananciasSegun(criterio: (Registro) => Boolean) = atributoDe(criterio, _.tasaGanancias)
+  def registraActividadSegun(criterio: (Registro) => Boolean) = registrosSegun(criterio).nonEmpty
 
   def esSolida = registros.forall(_.esSolido)
   def esSospechosa = registros.exists(_.esSospechoso)
 
-  private def atributoDe[A](criterio: (Registro) => Boolean, propiedad: (Registro) => A, default: A) =
-    registroDe(criterio).map(propiedad).getOrElse(default)
+  private def atributoDe[A : Numeric](criterio: (Registro) => Boolean, propiedad: (Registro) => A) =
+    registrosSegun(criterio).map(propiedad).sum
 
-  private def registroDe(criterio: (Registro) => Boolean) = registros.find(criterio)
+  private def registrosSegun(criterio: (Registro) => Boolean) = registros.filter(criterio)
 }

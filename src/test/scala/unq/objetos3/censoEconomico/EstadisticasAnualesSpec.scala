@@ -34,11 +34,11 @@ class EstadisticasAnualesSpec extends UnitSpec {
   }
 
   it should "saber cuantas empresas superan un monto X de ventas" in {
-    new EstadisticasAnuales(2013).empresasConVentasMayoresA(60000) should be (1)
+    new EstadisticasAnuales(2013).registrosConVentasMayoresA(60000) should be (1)
   }
 
   it should "saber cuantas empresas superan un monto X de tasa de ganancias" in {
-    new EstadisticasAnuales(2014).empresasConTasaGananciaMayoresA(30) should be (2)
+    new EstadisticasAnuales(2014).registrosConTasaGananciaMayoresA(30) should be (2)
   }
 
   it should "saber la cantidad de ventas por provincia" in {
