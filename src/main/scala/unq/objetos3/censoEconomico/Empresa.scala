@@ -1,3 +1,3 @@
 package unq.objetos3.censoEconomico
 
-class Empresa(val nombre: String, val fuente: String, departamento: Departamento) extends EmpresaAnonima(departamento)
+class Empresa(val nombre: String, val fuente: FuenteInformacion, departamento: Departamento) extends EmpresaAnonima(departamento)
