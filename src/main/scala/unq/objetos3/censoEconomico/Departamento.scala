@@ -1,5 +1,3 @@
 package unq.objetos3.censoEconomico
 
-class Departamento(val nombre: String, val provincia: String) {
-
-}
+case class Departamento(nombre: String, provincia: Provincia)

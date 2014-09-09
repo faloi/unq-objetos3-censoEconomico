@@ -47,7 +47,7 @@ class EstadisticasAnualesSpec extends UnitSpec {
       .agregarRegistro(new Registro(new LocalDate(2014, 12, 30), 100000, 100000))
     )
 
-    new EstadisticasAnuales(2014).ventasPorProvincia should be (Map("Corrientes" -> 100000, "CABA" -> 140000))
+    new EstadisticasAnuales(2014).ventasPorProvincia should be (Map(Provincia("Corrientes") -> 100000, Provincia("CABA") -> 140000))
   }
 
   it should "saber los nombres de las empresas que supera un monto X de ventas" in {
