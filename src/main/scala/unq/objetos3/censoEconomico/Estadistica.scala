@@ -24,7 +24,8 @@ trait Estadistica {
       .groupBy(_.departamento.provincia)
       .mapValues(empresasDeProvincia => empresasDeProvincia.map(_.ventas).sum)
 
-  def nombreEmpresasConVentasMayoresA(monto: Int) = registrosDeEmpresasConocidas.filter(_.ventas > monto).map(_.empresa.get.nombre)
+  def nombreEmpresasConVentasMayoresA(monto: Int) =
+    registrosDeEmpresasConocidas.filter(_.ventas > monto).map(_.empresa.get.nombre).distinct
 
   def fuentesQueAportaron = registrosDeEmpresasConocidas.map(_.fuente).distinct
 

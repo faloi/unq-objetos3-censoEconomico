@@ -44,8 +44,10 @@ class ProvinciaSpec extends UnitSpec {
   }
 
   it should "saber los nombres de las empresas que supera un monto X de ventas" in {
-    Registro(new LocalDate(2014, 12, 30), 160000, 100000,
-      new Empresa("SZnet S.A.", "Gremio del codigo de barras", new Departamento("Villa Luro", "CABA")))
+    val sznet = new Empresa("SZnet S.A.", "Gremio del codigo de barras", new Departamento("Villa Luro", "CABA"))
+
+    Registro(new LocalDate(2013, 12, 30), 160000, 100000, sznet)
+    Registro(new LocalDate(2014, 12, 30), 160000, 100000, sznet)
 
     Provincia("CABA").nombreEmpresasConVentasMayoresA(100000) should be (Seq("SZnet S.A."))
   }
