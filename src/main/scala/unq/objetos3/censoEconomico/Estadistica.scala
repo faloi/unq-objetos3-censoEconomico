@@ -3,34 +3,34 @@ package unq.objetos3.censoEconomico
 trait Estadistica {
   val criterio: (Registro) => Boolean
 
-  def totalVentas = ventasSegunCriterio.foldLeft(0)(_ + _)
+  def totalVentas = ventas.foldLeft(0)(_ + _)
 
   def totalVentasSinFold = {
     var acum = 0
-    ventasSegunCriterio.foreach(acum += _)
+    ventas.foreach(acum += _)
     acum
   }
 
-  def totalGanancias = empresas.map(_.totalGananciasSegun(criterio)).foldLeft(0)(_ + _)
+  def totalGanancias = registros.map(_.ganancias).sum
 
-  def registrosConVentasMayoresA(monto: Int) = ventasSegunCriterio.count(_ > monto)
+  def registrosConVentasMayoresA(monto: Int) = ventas.count(_ > monto)
 
-  def empresasConGananciasMayoresA(monto: Int) = ventasSegunCriterio.count(_ > monto)
+  def empresasConGananciasMayoresA(monto: Int) = ventas.count(_ > monto)
 
-  def registrosConTasaGananciaMayoresA(monto: Int) = empresas.map(_.tasaGananciasSegun(criterio)).count(_ > monto)
+  def registrosConTasaGananciaMayoresA(monto: Int) = registros.map(_.tasaGanancias).count(_ > monto)
 
   def ventasPorProvincia =
-    empresas
+    registros
       .groupBy(_.departamento.provincia)
-      .mapValues(empresasDeProvincia => empresasDeProvincia.map(_.totalVentasSegun(criterio)).sum)
+      .mapValues(empresasDeProvincia => empresasDeProvincia.map(_.ventas).sum)
 
-  def nombreEmpresasConVentasMayoresA(monto: Int) = empresasConocidas.filter(_.totalVentasSegun(criterio) > monto).map(_.nombre)
+  def nombreEmpresasConVentasMayoresA(monto: Int) = registrosDeEmpresasConocidas.filter(_.ventas > monto).map(_.empresa.get.nombre)
 
-  def fuentesQueAportaron = empresasConocidas.filter(_.registraActividadSegun(criterio)).map(_.fuente).distinct
+  def fuentesQueAportaron = registrosDeEmpresasConocidas.map(_.fuente).distinct
 
-  def empresaConMasGanancias = empresasConocidas.maxBy(_.totalGananciasSegun(criterio)).nombre
+  def empresaConMasGanancias = registrosDeEmpresasConocidas.maxBy(_.ganancias).empresa.get.nombre
 
-  private def empresas = HomeEmpresas.all
-  private def empresasConocidas = HomeEmpresas.conocidas
-  private def ventasSegunCriterio = empresas.map(_.totalVentasSegun(criterio))
+  private def registros = HomeRegistros.all.filter(criterio)
+  private def registrosDeEmpresasConocidas = HomeRegistros.deEmpresasConocidas.filter(criterio)
+  private def ventas = registros.map(_.ventas)
 }

@@ -3,32 +3,38 @@ package unq.objetos3.censoEconomico
 import org.joda.time.LocalDate
 
 class EmpresaSpec extends UnitSpec {
+  var unaEmpresa: Empresa = _
+
+  before {
+    unaEmpresa = new Empresa("Arcor", "Golosinas", new Departamento("La Plata", "Buenos Aires"))
+  }
+
   "Una empresa" should "ser solida si todos sus registros tienen tasa > a 10" in {
-    new EmpresaAnonima(new Departamento("La Plata", "Buenos Aires"))
-      .agregarRegistro(new Registro(new LocalDate(2012, 12, 30), 70000, 7100))  //tasa: 10.1
-      .agregarRegistro(new Registro(new LocalDate(2013, 12, 30), 70000, 50000))  //tasa: 71
-      .agregarRegistro(new Registro(new LocalDate(2014, 12, 30), 100000, 80000)) //tasa: 80
-      .esSolida should be (true)
+    Registro(new LocalDate(2012, 12, 30), 70000, 7100, unaEmpresa)   //tasa: 10.1
+    Registro(new LocalDate(2013, 12, 30), 70000, 50000, unaEmpresa)  //tasa: 71
+    Registro(new LocalDate(2014, 12, 30), 100000, 80000, unaEmpresa) //tasa: 80
+
+    unaEmpresa.esSolida should be (true)
   }
 
   it should "no ser solida si alguno de sus registros tiene tasa <= a 10" in {
-    new EmpresaAnonima(new Departamento("La Plata", "Buenos Aires"))
-      .agregarRegistro(new Registro(new LocalDate(2012, 12, 30), 70000, 7000))  //tasa: 10
-      .agregarRegistro(new Registro(new LocalDate(2013, 12, 30), 70000, 50000))  //tasa: 71
-      .esSolida should be (false)
+    Registro(new LocalDate(2012, 12, 30), 70000, 7000, unaEmpresa)  //tasa: 10
+    Registro(new LocalDate(2013, 12, 30), 70000, 50000, unaEmpresa) //tasa: 71
+
+    unaEmpresa.esSolida should be (false)
   }
 
   it should "ser sospechosa si al menos un registro tiene tasa > a 85" in {
-    new Empresa("Papel Prensa", "Clarin", new Departamento("La Plata", "Buenos Aires"))
-      .agregarRegistro(new Registro(new LocalDate(2012, 12, 30), 70000, 60200))  //tasa: 86
-      .agregarRegistro(new Registro(new LocalDate(2013, 12, 30), 70000, 50000))  //tasa: 71
-      .esSospechosa should be (true)
+    Registro(new LocalDate(2012, 12, 30), 70000, 60200, unaEmpresa) //tasa: 86
+    Registro(new LocalDate(2013, 12, 30), 70000, 50000, unaEmpresa) //tasa: 71
+
+    unaEmpresa.esSospechosa should be (true)
   }
 
   it should "no ser sospechosa si ningun registro tiene tasa > a 85" in {
-    new EmpresaAnonima(new Departamento("La Plata", "Buenos Aires"))
-      .agregarRegistro(new Registro(new LocalDate(2012, 12, 30), 70000, 7000))  //tasa: 10
-      .agregarRegistro(new Registro(new LocalDate(2013, 12, 30), 70000, 50000))  //tasa: 71
-      .esSospechosa should be (false)
+    Registro(new LocalDate(2012, 12, 30), 70000, 7000, unaEmpresa)  //tasa: 10
+    Registro(new LocalDate(2013, 12, 30), 70000, 50000, unaEmpresa) //tasa: 71
+
+    unaEmpresa.esSospechosa should be (false)
   }
 }
