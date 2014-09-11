@@ -1,6 +1,6 @@
 package unq.objetos3.censoEconomico
 
-class FuenteInformacion(val nombre: String)
+case class FuenteInformacion(nombre: String)
 
 object FuenteInformacion {
   implicit def stringToFuente(value: String) = new FuenteInformacion(value)
