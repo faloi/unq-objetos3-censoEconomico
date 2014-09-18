@@ -1,6 +1,7 @@
-package unq.objetos3.censoEconomico
+package unq.objetos3.censoEconomico.domain
 
 import org.joda.time.LocalDate
+import unq.objetos3.censoEconomico.UnitSpec
 
 class EmpresaSpec extends UnitSpec {
   var unaEmpresa: Empresa = _

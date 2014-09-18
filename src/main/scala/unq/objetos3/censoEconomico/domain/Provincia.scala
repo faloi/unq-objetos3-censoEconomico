@@ -1,4 +1,4 @@
-package unq.objetos3.censoEconomico
+package unq.objetos3.censoEconomico.domain
 
 case class Provincia(nombre: String) extends Estadistica {
   override val criterio = (registro: Registro) => registro.esDeProvincia(this)

@@ -1,6 +1,7 @@
-package unq.objetos3.censoEconomico
+package unq.objetos3.censoEconomico.domain
 
 import org.joda.time.LocalDate
+import unq.objetos3.censoEconomico.UnitSpec
 
 class GrupoDepartamentosSpec extends UnitSpec {
   val departamentosCaba = new GrupoDepartamentos(Set(new Departamento("Flores", "CABA"), new Departamento("Almagro", "CABA")))
@@ -28,9 +29,5 @@ class GrupoDepartamentosSpec extends UnitSpec {
     Registro(new LocalDate(2014, 12, 30), 40000, 30000, Departamento("Palermo", "CABA"))
 
     departamentosCaba.totalVentas should be(170000)
-  }
-
-  after {
-    HomeRegistros.clear()
   }
 }

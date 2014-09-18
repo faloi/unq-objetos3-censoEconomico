@@ -1,4 +1,4 @@
-package unq.objetos3.censoEconomico
+package unq.objetos3.censoEconomico.domain
 
 class GrupoDepartamentos(val departamentos: Set[Departamento]) extends Estadistica {
   def incluyeA(provincia: Provincia) = departamentos.exists(_.provincia == provincia)

@@ -1,6 +1,7 @@
-package unq.objetos3.censoEconomico
+package unq.objetos3.censoEconomico.domain
 
 import org.joda.time.LocalDate
+import unq.objetos3.censoEconomico.UnitSpec
 
 class EstadisticasAnualesSpec extends UnitSpec {
   var camaraIndustriaLitoral: FuenteInformacion = _
@@ -70,9 +71,5 @@ class EstadisticasAnualesSpec extends UnitSpec {
       new Empresa("Globant", "Union Informatica", new Departamento("Puerto Madero", "CABA")))
 
     new EstadisticasAnuales(2014).empresaConMasGanancias should be ("Globant")
-  }
-
-  after {
-    HomeRegistros.clear()
   }
 }

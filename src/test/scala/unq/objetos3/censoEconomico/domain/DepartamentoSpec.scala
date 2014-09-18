@@ -1,6 +1,7 @@
-package unq.objetos3.censoEconomico
+package unq.objetos3.censoEconomico.domain
 
 import org.joda.time.LocalDate
+import unq.objetos3.censoEconomico.UnitSpec
 
 class DepartamentoSpec extends UnitSpec {
   val esquinaCorrientes = Departamento("Esquina", "Corrientes")
@@ -65,9 +66,5 @@ class DepartamentoSpec extends UnitSpec {
     Registro(new LocalDate(2014, 12, 30), 1600000, 1000000, new Empresa("Globant", "Union Informatica", esquinaCorrientes))
 
     esquinaCorrientes.empresaConMasGanancias should be ("Globant")
-  }
-
-  after {
-    HomeRegistros.clear()
   }
 }

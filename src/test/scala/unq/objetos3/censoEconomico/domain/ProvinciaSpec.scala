@@ -1,6 +1,7 @@
-package unq.objetos3.censoEconomico
+package unq.objetos3.censoEconomico.domain
 
 import org.joda.time.LocalDate
+import unq.objetos3.censoEconomico.UnitSpec
 
 class ProvinciaSpec extends UnitSpec {
   var camaraIndustriaLitoral: FuenteInformacion = _
@@ -65,9 +66,5 @@ class ProvinciaSpec extends UnitSpec {
       new Empresa("Globant", "Union Informatica", new Departamento("Puerto Madero", "CABA")))
 
     Provincia("CABA").empresaConMasGanancias should be ("Globant")
-  }
-
-  after {
-    HomeRegistros.clear()
   }
 }
