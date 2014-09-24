@@ -1,10 +1,10 @@
-package unq.objetos3.censoEconomico.domain.registros.validadores
+package unq.objetos3.censoEconomico.domain.registros.validadores.mixines
 
-trait Validador {
+trait ValidadorMixin {
   def esConsistenteMixin: Boolean
 }
 
-trait StackableValidador extends Validador {
+trait StackableValidador extends ValidadorMixin {
   def esConsistente: Boolean
 
   abstract override def esConsistenteMixin = super.esConsistenteMixin && esConsistente

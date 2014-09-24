@@ -1,8 +1,8 @@
-package unq.objetos3.censoEconomico.domain.registros.validadores
+package unq.objetos3.censoEconomico.domain.registros.validadores.mixines
 
 import unq.objetos3.censoEconomico.domain.{Departamento, FuenteInformacion}
 
-trait ValidadorProvincia extends StackableValidador {
+trait ValidadorProvinciaMixin extends StackableValidador {
   def fuente: FuenteInformacion
   def departamento: Departamento
   def esAnonimo: Boolean

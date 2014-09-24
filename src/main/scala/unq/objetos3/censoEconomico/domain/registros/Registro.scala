@@ -1,9 +1,11 @@
 package unq.objetos3.censoEconomico.domain.registros
 
 import org.joda.time.LocalDate
-import unq.objetos3.censoEconomico.domain.registros.validadores.Validador
+import unq.objetos3.censoEconomico.domain.registros.validadores.mixines.ValidadorMixin
+import unq.objetos3.censoEconomico.domain.registros.validadores.strategy.ValidadorStrategy
 import unq.objetos3.censoEconomico.domain.{Departamento, Empresa, FuenteInformacion, Provincia}
 import unq.objetos3.censoEconomico.homes.HomeRegistros
+import scala.collection.mutable
 
 case class Registro(
     fecha: LocalDate = LocalDate.now,
@@ -13,7 +15,9 @@ case class Registro(
     fuente: FuenteInformacion = new FuenteInformacion("Anonima"),
     anioObtencion: Int = LocalDate.now.year.get + 1,
     empresa: Option[Empresa] = None
-  )(implicit homeRegistros: HomeRegistros) extends Validador {
+  )(implicit homeRegistros: HomeRegistros) extends ValidadorMixin {
+  var validadores = mutable.Buffer[ValidadorStrategy]()
+  def conValidacion(validador: ValidadorStrategy) = { validadores += validador; this }
 
   val tasaGanancias = (ganancias.toFloat / ventas) * 100
 
@@ -26,6 +30,7 @@ case class Registro(
   homeRegistros.add(this)
 
   override def esConsistenteMixin: Boolean = true
+  def esConsistenteStrategy = validadores.forall(elem => elem.esConsistente(this))
 }
 
 object Registro {
