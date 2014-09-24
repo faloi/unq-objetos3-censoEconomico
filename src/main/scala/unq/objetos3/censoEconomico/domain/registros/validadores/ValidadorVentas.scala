@@ -1,6 +1,7 @@
 package unq.objetos3.censoEconomico.domain.registros.validadores
 
-trait ValidadorVentas extends Validador {
+trait ValidadorVentas extends StackableValidador {
   def ventas: Int
-  abstract override def esConsistenteMixin = super.esConsistenteMixin && ventas >= 0
+
+  override def esConsistente = ventas >= 0
 }

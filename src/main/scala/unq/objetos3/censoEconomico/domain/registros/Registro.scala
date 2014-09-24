@@ -21,6 +21,7 @@ case class Registro(
   def esSolido: Boolean = tasaGanancias > 10
   def esSospechoso: Boolean = tasaGanancias > 85
   def esDeProvincia(provincia: Provincia) = departamento.provincia == provincia
+  def esAnonimo = empresa.isEmpty
 
   homeRegistros.add(this)
 
