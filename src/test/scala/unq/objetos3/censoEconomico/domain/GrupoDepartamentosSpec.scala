@@ -2,6 +2,7 @@ package unq.objetos3.censoEconomico.domain
 
 import org.joda.time.LocalDate
 import unq.objetos3.censoEconomico.UnitSpec
+import unq.objetos3.censoEconomico.domain.registros.Registro
 
 class GrupoDepartamentosSpec extends UnitSpec {
   val departamentosCaba = new GrupoDepartamentos(Set(new Departamento("Flores", "CABA"), new Departamento("Almagro", "CABA")))

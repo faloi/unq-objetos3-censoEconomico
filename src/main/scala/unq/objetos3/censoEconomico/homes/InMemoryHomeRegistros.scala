@@ -1,6 +1,6 @@
 package unq.objetos3.censoEconomico.homes
 
-import unq.objetos3.censoEconomico.domain.Registro
+import unq.objetos3.censoEconomico.domain.registros.Registro
 
 import scala.collection.mutable
 

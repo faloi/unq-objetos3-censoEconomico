@@ -1,5 +1,6 @@
 package unq.objetos3.censoEconomico.domain
 
+import unq.objetos3.censoEconomico.domain.registros.Registro
 import unq.objetos3.censoEconomico.homes.HomeRegistros
 
 case class Empresa(val nombre: String, val fuente: FuenteInformacion, val departamento: Departamento)

@@ -1,4 +1,6 @@
 package unq.objetos3.censoEconomico.domain
+
+import unq.objetos3.censoEconomico.domain.registros.Registro
 import unq.objetos3.censoEconomico.homes.{InMemoryHomeRegistros, HomeRegistros}
 
 trait EstadisticaSimple {

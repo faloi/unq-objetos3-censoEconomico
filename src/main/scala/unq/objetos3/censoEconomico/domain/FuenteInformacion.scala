@@ -1,5 +1,7 @@
 package unq.objetos3.censoEconomico.domain
 
+import unq.objetos3.censoEconomico.domain.registros.Registro
+
 case class FuenteInformacion(nombre: String) extends EstadisticaCompleja {
   override val criterio: (Registro) => Boolean = _.fuente == this
 }
