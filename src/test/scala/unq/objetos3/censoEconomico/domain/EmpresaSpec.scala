@@ -38,4 +38,12 @@ class EmpresaSpec extends UnitSpec {
 
     unaEmpresa.esSospechosa should be (false)
   }
+
+  it should "saber calcular el total de sus ventas" in {
+    Registro(new LocalDate(2012, 12, 30), 70000, 7000, unaEmpresa)
+    Registro(new LocalDate(2012, 12, 30), 70000, 7000,
+      Empresa("Molinos Rio de la Plata", FuenteInformacion("Alimenticia"), Departamento("San Fernando", "Buenos Aires")))
+
+    unaEmpresa.totalVentas should be (70000)
+  }
 }
