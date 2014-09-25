@@ -5,10 +5,10 @@ import unq.objetos3.censoEconomico.JasmineSpec
 import unq.objetos3.censoEconomico.domain.registros.Registro
 import unq.objetos3.censoEconomico.homes.InMemoryHomeRegistros
 
-class ConjuntoAniosSumaSpec extends JasmineSpec {
+class ConjuntoAniosPromedioSpec extends JasmineSpec {
   implicit val homeRegistros = InMemoryHomeRegistros
 
-  describe("A partir de un conjunto de anios y sumando los valores") {
+  describe("A partir de un conjunto de anios y promediando los valores") {
     afterEach {
       homeRegistros.clear()
     }
@@ -24,21 +24,21 @@ class ConjuntoAniosSumaSpec extends JasmineSpec {
     }
 
     it("should poder saberse el total de ventas") {
-      ConjuntoAniosSuma(2009, 2011, 2013).totalVentas should be(135000)
+      ConjuntoAniosPromedio(2009, 2011, 2013).totalVentas should be(45000)
     }
 
     it("should poder saber las empresas con mas de X pesos en ventas") {
       Registro(new LocalDate(2013, 12, 12), 99000, 89000,
         Empresa("Microsoft", "Redmond Survey", Departamento("Redmond", "Washington")))
 
-      ConjuntoAniosSuma(2009, 2011, 2013).nombreEmpresasConVentasMayoresA(100000) should be(Seq("Sapucay S.A."))
+      ConjuntoAniosPromedio(2009, 2011, 2013).nombreEmpresasConVentasMayoresA(50000) should be(Seq("Microsoft"))
     }
 
     it("should poder saber cuantas empresas superan X pesos de ganancias") {
       Registro(new LocalDate(2013, 12, 12), 99000, 89000,
         Empresa("Microsoft", "Redmond Survey", Departamento("Redmond", "Washington")))
 
-      ConjuntoAniosSuma(2010, 2013).registrosConGananciasMayoresA(70000) should be(2)
+      ConjuntoAniosPromedio(2010, 2013).registrosConGananciasMayoresA(70000) should be(1)
     }
   }
 }
