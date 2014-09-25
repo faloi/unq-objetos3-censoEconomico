@@ -6,6 +6,4 @@ trait HomeRegistros {
   def all: Seq[Registro]
   def clear()
   def add(registros: Registro*)
-
-  def deEmpresasConocidas = all.filter(_.empresa.isDefined)
 }

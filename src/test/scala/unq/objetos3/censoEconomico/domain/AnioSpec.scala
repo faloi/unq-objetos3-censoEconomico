@@ -4,7 +4,7 @@ import org.joda.time.LocalDate
 import unq.objetos3.censoEconomico.UnitSpec
 import unq.objetos3.censoEconomico.domain.registros.Registro
 
-class EstadisticasAnualesSpec extends UnitSpec {
+class AnioSpec extends UnitSpec {
   var camaraIndustriaLitoral: FuenteInformacion = _
 
   before {
@@ -33,6 +33,10 @@ class EstadisticasAnualesSpec extends UnitSpec {
 
   it should "saber cuantas empresas superan un monto X de ventas" in {
     new Anio(2013).registrosConVentasMayoresA(60000) should be (1)
+  }
+
+  it should "saber cuantas empresas superan un monto X de ganancias" in {
+    new Anio(2013).registrosConGananciasMayoresA(150000) should be (0)
   }
 
   it should "saber cuantas empresas superan un monto X de tasa de ganancias" in {

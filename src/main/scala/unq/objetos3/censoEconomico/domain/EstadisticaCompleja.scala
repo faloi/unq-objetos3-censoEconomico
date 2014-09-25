@@ -13,5 +13,5 @@ trait EstadisticaCompleja extends EstadisticaSimple {
 
   def empresaConMasGanancias = registrosDeEmpresasConocidas.maxBy(_.ganancias).empresa.get.nombre
 
-  private def registrosDeEmpresasConocidas = homeRegistros.deEmpresasConocidas.filter(criterio)
+  protected def registrosDeEmpresasConocidas = registros.filter(!_.esAnonimo)
 }
